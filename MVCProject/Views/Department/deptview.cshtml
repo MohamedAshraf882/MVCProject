@@ -2,10 +2,12 @@
 @{
 	ViewData["Title"] = "Department List";
 }
+<h1> index</h1>
+<a href="/Department/Add" class="btn btn-success">New</a>
 <table class="table table-bordered table-hover" >
 	
 	<tr>
-		<th>Id</th>
+		<th>No.</th>
 		<th>Name</th>
 		<th>Manager</th>
 	</tr>
@@ -14,7 +16,11 @@
 		
 		<tr>
 			<td>@dept.Id</td>
-			<td>@dept.Name</td>
+			<td>
+				<a asp-action="Details" asp-route-id="@dept.Id">
+					@dept.Name
+			</a>
+			</td>
 			<td>@dept.Manger</td>
 		</tr>
 	}

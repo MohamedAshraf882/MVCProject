@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MVCProject.Models;
 
 namespace MVCProject.ModelBL
@@ -18,7 +20,20 @@ namespace MVCProject.ModelBL
             {
                 return _context.Departments.ToList();
             }
-       
+        public Department details(int id)
+        {
+            return _context.Departments.FirstOrDefault(d => d.Id == id);
+        }
+
+        public Department Add(Department dept)
+        {
+           
+            
+            _context.Departments.Add(dept);
+            _context.SaveChanges();
+            return dept;
+        }
+
 
 
 
