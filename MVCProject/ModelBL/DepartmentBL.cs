@@ -33,6 +33,17 @@ namespace MVCProject.ModelBL
             _context.SaveChanges();
             return dept;
         }
+        public Department Update(Department dept)
+        {
+            var existingDept = _context.Departments.FirstOrDefault(d => d.Id == dept.Id);
+            if (existingDept != null)
+            {
+                existingDept.Name = dept.Name;
+                existingDept.Manger = dept.Manger;
+                _context.SaveChanges();
+            }
+            return existingDept;
+        }
 
 
 

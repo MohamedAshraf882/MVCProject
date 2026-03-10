@@ -12,11 +12,13 @@ namespace MVCProject.Controllers
             _departmentBL = departmentBL;
         }
 
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+
+        [HttpGet]
         public IActionResult GetAll()
         {
             var departments = _departmentBL.GetAllDepartments();
@@ -27,6 +29,7 @@ namespace MVCProject.Controllers
             return View("deptview", departments);
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var department = _departmentBL.details(id);
@@ -37,12 +40,13 @@ namespace MVCProject.Controllers
             return View("deptdetails", department);
         }
 
-
+        [HttpGet]
         public IActionResult Add()
         {
             return View("Add");
         }
 
+        [HttpPost]
         public IActionResult SaveAdd(Department dept)
         {
             if (dept == null || dept.Name == null || dept.Manger == null)
@@ -54,5 +58,31 @@ namespace MVCProject.Controllers
             //return View("deptview");
             return RedirectToAction("GetAll");
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var department = _departmentBL.details(id);
+            if (department == null)
+            {
+                return NotFound($"Department with ID {id} not found.");
+            }
+
+            return View("Edit",department);
+        }
+
+        [HttpPost]
+       public IActionResult SaveEdit(Department dept)
+        {
+            if (dept ==null||dept.Name == null || dept.Manger == null)
+            {
+                return View("Edit", dept);
+                
+            }
+           _departmentBL.Update(dept);
+            //return View("deptview");
+            return RedirectToAction("GetAll");
+        }
+
     }
 }
