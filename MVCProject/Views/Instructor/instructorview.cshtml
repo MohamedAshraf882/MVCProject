@@ -1,0 +1,42 @@
+﻿@model List<Instructor>
+@{
+	ViewData["Title"] = "Instructor View";
+ }
+
+<h1>Instructor List</h1>
+<a href="/Instructor/Create" class="btn btn-success">New</a>
+<table class="table table-bordered table-hover">
+
+	<tr>
+		<th>No.</th> 
+		<th>Name</th>
+		<th>Image</th>
+		<th>Department</th>
+		<th>Address</th>
+		<th>Salary</th>
+		<th>Course</th>
+
+	</tr>
+
+	@foreach(var inst in Model)
+	{
+		
+		<tr>
+			<td>@inst.Id</td>
+			<td>
+				<a asp-action="Details" asp-route-id="@inst.Id">
+					@inst.Name
+				</a> 
+			</td>
+			<td> @inst.Image</td>
+			<td> @inst.Department.Name</td>
+			<td> @inst.Address</td>
+			<td> @inst.Salary</td>
+			<td> @inst.Course.Name</td>
+		    <td >
+				<a href="/Instructor/Edit/@inst.Id">Edit</a>
+			</td>
+		</tr>
+	}
+
+</table>

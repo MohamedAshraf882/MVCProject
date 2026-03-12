@@ -12,11 +12,7 @@ namespace MVCProject.Controllers
             _departmentBL = departmentBL;
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
 
         [HttpGet]
         public IActionResult GetAll()
