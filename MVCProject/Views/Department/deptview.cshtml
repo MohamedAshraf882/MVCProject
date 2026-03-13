@@ -2,7 +2,7 @@
 @{
 	ViewData["Title"] = "Department View";
 }
-<h1> Department LIst</h1>
+<h1> Department List</h1>
 <a href="/Department/Add" class="btn btn-success">New</a>
 <table class="table table-bordered table-hover" >
 	
@@ -10,6 +10,7 @@
 		<th>No.</th> 
 		<th>Name</th>
 		<th>Manager</th>
+		<th>Dept Edit</th>
 	</tr>
 	@foreach(var dept in Model)
 	{
@@ -23,7 +24,7 @@
 			</td>
 			<td>@dept.Manger</td>
 			<td>
-				<a href="/Department/Edit/@dept.Id">Edit</a>
+				<a href="/Department/Edit/@dept.Id" class=" btn btn-success">Edit</a>
 			</td>
 		</tr>
 	}

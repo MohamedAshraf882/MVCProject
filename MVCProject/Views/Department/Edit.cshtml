@@ -3,7 +3,7 @@
 	ViewData["Title"] = "Edit";
 
 }
-<h1> Edit</h1>
+<h1> Edit </h1>
 <form method="post" action="/Department/SaveEdit/@Model.Id">
 	<div>
 		<label>Name</label>
@@ -14,6 +14,8 @@
 		<input name="Manger" id="Manger" value="@Model.Manger" type="text" class="form form-control" />
 	</div>
 	<div>
+		<div>
 		<input type="submit" value="Save" class="btn btn-primary" />
+		</div>
 	</div>
 </form>

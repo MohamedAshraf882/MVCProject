@@ -64,7 +64,64 @@ namespace MVCProject.Controllers
             return RedirectToAction("Index");
 
         }
+        [HttpGet]
+        public IActionResult SearchName(string name)
+        {
+            var result=_instructorBL.SearchByName(name);
+           
+                return View("instructorview", result);
 
+
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var iNstFromD=_instructorBL.GetById(id);
+            var Department = _departmentBL.GetAllDepartments();
+            var Courses=_coursebl.GetAll();
+            var VM = new InstructorwithDepartment_Course_View
+            {
+                Id=iNstFromD.Id,
+                Name = iNstFromD.Name,
+                Address = iNstFromD.Address,
+                Image = iNstFromD.Image,
+                Salary = iNstFromD.Salary,
+                Dept_Id = iNstFromD.Dept_Id,
+                Crs_Id = iNstFromD.Crs_Id,
+                DeptList = Department,
+                CrsList = Courses,
+            };
+            return View("Edit", VM);   
+        }
+        [HttpPost]
+        public IActionResult SaveEdit(InstructorwithDepartment_Course_View VM)
+        {
+            if (!ModelState.IsValid) 
+            { 
+             VM.DeptList=_departmentBL.GetAllDepartments();
+             VM.CrsList=_coursebl.GetAll();
+                return View("Edit", VM);
+            }
+            _instructorBL.Updateinst(VM); 
+            return RedirectToAction("Index");
+            
+        }
+        //public IActionResult Deleteinst(int id)
+        //{
+        //    var inst=_instructorBL.GetById(id);
+        //    return View("instructorview", inst);
+
+
+
+        //}
+
+       // [HttpPost]
+        public IActionResult savedelete(int id) 
+        {
+            _instructorBL.Deleteinst(id);
+            return RedirectToAction("Index");
+        
+        }
        
     }
 }

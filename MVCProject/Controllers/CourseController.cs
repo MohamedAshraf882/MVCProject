@@ -13,6 +13,7 @@ namespace MVCProject.Controllers
             _coursebl = courseBl;
         }
 
+        [HttpGet]
         public IActionResult GetAllCourse()
         {
             var courses = _coursebl.GetAll();
@@ -22,7 +23,7 @@ namespace MVCProject.Controllers
             }
             return View("allcoursesview", courses);
         }
-
+        [HttpGet]
         public IActionResult GetCourseById(int id)
         {
          var course = _coursebl.GetById(id);

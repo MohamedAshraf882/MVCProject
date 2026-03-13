@@ -1,11 +1,11 @@
-﻿@using MVCProject.ModelView
+﻿
 @model InstructorwithDepartment_Course_View
 
 @{
 	ViewData["Title"] = "Add Instructor";
 }
 
-<h1> Add Instructor</h1>
+<h1> Create new Instructor</h1>
 <form method="post" action="/Instructor/SaveCreate">
 	<div>
 	<label>Name</label>
@@ -36,6 +36,7 @@
 	<div>
 		<label>Course_Id</label>
 		<select name="Crs_Id" id="Crs_Id" class="form form-control">
+
 			@foreach (var course in Model.CrsList)
 			{
 				<option value="@course.Id">@course.Name</option>
@@ -44,6 +45,6 @@
 	@*	<input name="Crs-Id" id="Crs-Id" value="@Model?.Crs_Id" type="number" class="form form-control" />*@
 	</div>
 	
-	<input type="submit" value="Create" class="btn btn-primary" />
+	<input type="submit" value="Create" class="btn btn-success" />
 </form>
 <a href="/Instructor/Index"> Back to List </a>
