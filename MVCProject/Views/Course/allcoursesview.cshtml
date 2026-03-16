@@ -3,7 +3,12 @@
 	ViewData["Title"] = "All Courses";
 }
 <h1>All Courses</h1>
+<form asp-action="SearchByName" method="Get" class="form form-control">
+	<input name="Name" type="text" placeholder="Search By Name" />
+	<button type="submit" class="btn btn-secondary">Search</button>
+</form>
 
+<a asp-action="AddCourse" asp-controller="Course" class="btn btn-primary"> New Course</a>
 <table class="table table-bordered table-hover">
 	<tr>
 		<th>No.</th>
@@ -12,6 +17,7 @@
 		<th>Degree</th>
 		<th>Min Degree</th>
 		<th>Dept-Id</th>
+		<th>Edit</th>
 	</tr>
 		@foreach(var course in Model)
 		{
@@ -26,6 +32,9 @@
 				<td> @course.Degree</td>
 				<td> @course.MinDegree</td>
 				<td> @course.Dept_Id</td>
+				<td>
+					<a href="/Course/Edit/@course.Id" class="btn btn-primary">Edit</a>
+				</td>
 			</tr>
 	    } 
 

@@ -44,7 +44,16 @@
 				<a href="/Instructor/Edit/@inst.Id" class="btn btn-primary">Edit</a>
 			</td>
 		    <td >
-				<a href="/Instructor/savedelete/@inst.Id" class="btn btn-danger">Delete</a>
+				<form asp-action="SaveDelete" method="post" style="display:inline">
+
+					<input type="hidden" name="id" value="@inst.Id" />
+
+					<button type="submit" class="btn btn-danger">
+						Delete
+					</button>
+
+				</form>
+				@*<a href="/Instructor/savedelete/@inst.Id" class="btn btn-danger">Delete</a>*@
 			</td>
 		</tr>
 	}

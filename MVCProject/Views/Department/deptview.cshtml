@@ -2,7 +2,20 @@
 @{
 	ViewData["Title"] = "Department View";
 }
+@if (TempData["Error"] != null)
+{
+	<div class="alert alert-danger">
+		@TempData["Error"]
+	</div>
+}
 <h1> Department List</h1>
+<form asp-action="SearchByName" method="get">
+	<input type="text" name="Name" placeholder="Search By Name" />
+	<button type="submit" class="btn btn-info">
+		Search
+	</button>
+
+</form>
 <a href="/Department/Add" class="btn btn-success">New</a>
 <table class="table table-bordered table-hover" >
 	
@@ -25,6 +38,18 @@
 			<td>@dept.Manger</td>
 			<td>
 				<a href="/Department/Edit/@dept.Id" class=" btn btn-success">Edit</a>
+			</td>
+			<td>
+				<form asp-action="Delete" method="post" style="display:inline">
+
+					<input type="hidden" name="id" value="@dept.Id" />
+
+					<button type="submit" class="btn btn-danger">
+						Delete
+					</button>
+
+				</form>
+				
 			</td>
 		</tr>
 	}

@@ -45,6 +45,47 @@ namespace MVCProject.ModelBL
             return existingDept;
         }
 
-       
+        public List<Department> Search(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return _context.Departments.ToList();
+            }
+            var dept=_context.Departments
+                .Where(d=>d.Name.Contains(name))
+                .OrderBy(d=>d.Name.IndexOf(name))
+                .ThenBy(d=>d.Name)
+                .ToList();
+
+            return dept;
+        }
+
+        public bool delete(int id)
+        {
+            var dept = _context.Departments.FirstOrDefault(d => d.Id == id);
+            if (dept == null)
+            {
+                return false;
+               
+            }
+            bool hasinstructor=_context.Instructors.Any(d => d.Dept_Id== id);
+            if (hasinstructor) 
+            {
+
+                return false;
+            
+            }
+            bool Hascourse=_context.Courses.Any(d => d.Dept_Id == id);
+            if (Hascourse) 
+            { 
+            return false;
+            }
+
+            _context.Remove(dept);
+            _context.SaveChanges();
+            return true;
+
+        }
+
     }
 }

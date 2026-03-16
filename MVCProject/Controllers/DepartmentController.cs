@@ -80,5 +80,29 @@ namespace MVCProject.Controllers
             return RedirectToAction("GetAll");
         }
 
+        [HttpGet]
+        public IActionResult SearchByName(string name) 
+        {
+        var dept=_departmentBL.Search(name);
+            return View("deptview", dept);
+        
+        
+        
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var result=_departmentBL.delete(id);
+            if (!result)
+            {
+                TempData["Error"] = "Department has instructors if you want delete it first delete instructors it have ";
+            }
+
+            return RedirectToAction("GetAll");
+
+
+        }
+
     }
 }

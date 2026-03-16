@@ -115,7 +115,7 @@ namespace MVCProject.Controllers
 
         //}
 
-       // [HttpPost]
+        [HttpPost]
         public IActionResult savedelete(int id) 
         {
             _instructorBL.Deleteinst(id);

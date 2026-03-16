@@ -1,0 +1,35 @@
+﻿@model Course_Department_VM
+@{
+	ViewData["Title"] = "Add Course";
+}
+<h1>Add New Course</h1>
+<form method="post" action="/Course/SaveAdd">
+	<div>
+	<label>Name</label>
+	<input name="Name" id="Name" type="text" value="@Model.Name" class=" form-check form-control" />
+	</div>
+	<div>
+	<label>Course Hours</label>
+	<input name="Hours" id="Hours" type="number" value="@Model.Hours" class="form-check form-control" />
+	</div>
+	<div>
+		<label>Course Degree</label>
+		<input name="Degree" id="Degree" type="number" value="@Model.Degree" class="form-check form-control" />
+	</div>
+	<div>
+		<label>Course Minmum Degree</label>
+		<input name="MinDegree" id="MinDegree" type="number" value="@Model.MinDegree" class="form-check form-control" />
+	</div>
+	<div>
+		<label>Department</label>
+		<select name="Dept_Id" id="Dept_Id" class="form form-control">
+			@foreach(var dept in Model.Deptlist)
+			{
+				<option value="@dept.Id">@dept.Name</option>
+			}
+		</select>
+	</div>
+	<input type="submit"  value="Create" class="btn btn-success" />
+
+</form> 
+<a href="/Course/GetAllCourse">Back To List</a> 
