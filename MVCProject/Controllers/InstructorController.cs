@@ -23,7 +23,7 @@ namespace MVCProject.Controllers
             var instructors = _instructorBL.GetAll();
               if (instructors == null || instructors.Count == 0)
               {
-                return NotFound("No instructors found.");
+                return View("instructorview",instructors);
               }
                 return View("instructorview", instructors);
         }
@@ -51,17 +51,50 @@ namespace MVCProject.Controllers
         [HttpPost]
         public IActionResult SaveCreate(InstructorwithDepartment_Course_View VM)
         {
-            
-            if(!ModelState.IsValid)
+            if (VM.Image != null)
             {
-                VM.DeptList=_departmentBL.GetAllDepartments();
-                VM.CrsList=_coursebl.GetAll();
-                return View("create",VM);
+                var allowedextensions = new[]
+                {
+                    ".jpg",".png",".jfif"
+                };
+                var extension=Path.GetExtension(VM.Image.FileName).ToLower();
+                if (!allowedextensions.Contains(extension))
+                {
+                    ModelState.AddModelError("Image", "Image must be (jpg,png,jfif)");
+                }
+                if (VM.Image.Length > 2 * 1024 * 1024)
+                {
+                    ModelState.AddModelError("Image", "Image Max size is 2MB");
+                }
+
             }
-           
-           
-            _instructorBL.AddInst(VM);
-            return RedirectToAction("Index");
+            if (VM.Dept_Id == 0)
+            {
+                ModelState.AddModelError("Dept_Id", "Select Department");
+            }
+            if (VM.Crs_Id == 0)
+            {
+                ModelState.AddModelError("Crs_Id", "Select Course");
+            }
+
+            if (ModelState.IsValid)
+            {
+                 //if (VM.Dept_Id == 0)
+                //{
+                //    ModelState.AddModelError("Dept_Id", "Select Department");
+                //}
+                //if (VM.Crs_Id == 0)
+                //{
+                //    ModelState.AddModelError("Crs_Id", "Select Course");
+                //}
+                _instructorBL.AddInst(VM);
+                return RedirectToAction("Index");
+            }
+
+            VM.DeptList = _departmentBL.GetAllDepartments();
+            VM.CrsList = _coursebl.GetAll();
+            return View("create", VM);
+            
 
         }
         [HttpGet]
@@ -79,18 +112,22 @@ namespace MVCProject.Controllers
             var iNstFromD=_instructorBL.GetById(id);
             var Department = _departmentBL.GetAllDepartments();
             var Courses=_coursebl.GetAll();
+
+            
             var VM = new InstructorwithDepartment_Course_View
             {
                 Id=iNstFromD.Id,
                 Name = iNstFromD.Name,
                 Address = iNstFromD.Address,
-                Image = iNstFromD.Image,
+                Currentimage=iNstFromD.Image,
+                //Image = iNstFromD.Image,
                 Salary = iNstFromD.Salary,
                 Dept_Id = iNstFromD.Dept_Id,
                 Crs_Id = iNstFromD.Crs_Id,
                 DeptList = Department,
                 CrsList = Courses,
-            };
+               
+        };
             return View("Edit", VM);   
         }
         [HttpPost]

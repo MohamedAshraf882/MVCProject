@@ -96,6 +96,13 @@ namespace MVCProject.Controllers
             return RedirectToAction("GetAllCourse");
 
         }
+        //[HttpPost]
+        //public IActionResult Delete(int id)
+        //{
+        //    _coursebl.deletecourse(id);
+        //    return RedirectToAction("GetAllCourse");
+            
+        //}
 
 
     }

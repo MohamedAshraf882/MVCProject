@@ -3,48 +3,74 @@
 
 @{
 	ViewData["Title"] = "Add Instructor";
+	SelectList deptoption = new SelectList(Model.DeptList, "Id", "Name");
+	SelectList CrsOption = new SelectList(Model.CrsList, "Id", "Name");
 }
 
 <h1> Create new Instructor</h1>
-<form method="post" action="/Instructor/SaveCreate">
+<form method="post" action="/Instructor/SaveCreate" enctype="multipart/form-data">
 	<div>
-	<label>Name</label>
-	<input name="Name" id="Name" value="@Model?.Name" type="text" class="form form-control" />
+	<label asp-for="Name"></label>
+	@* <input name="Name" id="Name" value="@Model?.Name" type="text" class="form form-control" /> *@
+	<input asp-for="Name" class="form form-control" /> 
+	<span asp-validation-for="Name" class="text-danger"></span>
 	</div>
 	<div>
-		<label>Image</label>
-		<input name="Image" id="Image" value="@Model?.Image" type="text" class="form form-control" />
+		@* <label>Image</label>
+		<input name="Image" id="Image" value="@Model?.Image" type="text" class="form form-control" /> *@
+		
+			<label>Image</label>
+			<input type="file" asp-for="Image" class="form-control" />
+			<span asp-validation-for="Image" class="text-danger"></span>
 	</div>
 	<div>
-		<label>Salary</label>
-		<input name="Salary" id="Salary" value="@Model?.Salary" type="number" class="form form-control" />
+		<label asp-for="Salary"></label>
+		<input asp-for="Salary" class="form form-control" />
+		@* <input name="Salary" id="Salary" value="@Model?.Salary" type="number" class="form form-control" /> *@
+		<span asp-validation-for="Salary" class="text-danger"></span>
 	</div>
 	<div>
-		<label>Address</label>
-		<input name="Address" id="Address" value="@Model?.Address" type="text" class="form form-control" />
+		<label asp-for="Address"></label>
+		<input asp-for="Address" class="form form-control" />
+		@* <input name="Address" id="Address" value="@Model?.Address" type="text" class="form form-control" /> *@
+		<span asp-validation-for="Address" class="text-danger"></span>
 	</div>
 	<div>
-		<label>Dept_Id</label>
+		<label asp-for="Dept_Id"></label>
 		@*<input name="Dept-Id" id="Dept-Id" value="@Model?.Dept_Id" type="number" class="form form-control" />*@
-		<select name ="Dept_Id" id="Dept_Id" class="form form-control">
+		@* <select name ="Dept_Id" id="Dept_Id" class="form form-control">
 			@foreach(var dept in Model.DeptList)
 			{
 				<option value="@dept.Id">@dept.Name</option>
 			}
+		</select> *@
+		<select class="form form-control"
+			asp-items="deptoption" asp-for="Dept_Id">
+		<option value="0">--select Department--</option>
 		</select>
+			<span asp-validation-for="Dept_Id" class="text-danger"></span>
 	</div>
 	<div>
-		<label>Course_Id</label>
-		<select name="Crs_Id" id="Crs_Id" class="form form-control">
+		<label asp-for="Crs_Id"></label>
+		@* <select name="Crs_Id" id="Crs_Id" class="form form-control">
 
 			@foreach (var course in Model.CrsList)
 			{
 				<option value="@course.Id">@course.Name</option>
 			}
-		</select>
+		</select> *@
 	@*	<input name="Crs-Id" id="Crs-Id" value="@Model?.Crs_Id" type="number" class="form form-control" />*@
+		<select class="form form-control" asp-items="CrsOption" asp-for="Crs_Id">
+			<option value="0">--select course--</option>
+		</select>
+		<span asp-validation-for="Crs_Id" class="text-danger"></span>
 	</div>
 	
 	<input type="submit" value="Create" class="btn btn-success" />
 </form>
+@section Scripts {
+	@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
 <a href="/Instructor/Index"> Back to List </a>

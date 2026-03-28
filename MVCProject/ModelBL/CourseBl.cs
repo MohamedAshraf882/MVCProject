@@ -14,7 +14,7 @@ namespace MVCProject.ModelBL
         }
         public List<Course> GetAll()
         {
-            var courses=_context.Courses.ToList();
+            var courses = _context.Courses.ToList();
             return courses;
         }
 
@@ -47,8 +47,8 @@ namespace MVCProject.ModelBL
                 return _context.Courses.Include(c => c.Department).ToList();
             }
 
-            var result= _context.Courses.Include(c=>c.Department).Where(c=>c.Name.Contains(name)).OrderBy(c=>c.Name.IndexOf(name))
-                .ThenBy(c=>c.Name)
+            var result = _context.Courses.Include(c => c.Department).Where(c => c.Name.Contains(name)).OrderBy(c => c.Name.IndexOf(name))
+                .ThenBy(c => c.Name)
                 .ToList();
             return result;
         }
@@ -57,18 +57,28 @@ namespace MVCProject.ModelBL
         {
             var course = _context.Courses.FirstOrDefault(c => c.Id == VM.Id);
 
-           
+
             course.Name = VM.Name;
-            course.Hours= VM.Hours;
-            course.Degree= VM.Degree;
-            course.MinDegree= VM.MinDegree;
-            course.Dept_Id= VM.Dept_Id;
+            course.Hours = VM.Hours;
+            course.Degree = VM.Degree;
+            course.MinDegree = VM.MinDegree;
+            course.Dept_Id = VM.Dept_Id;
 
             _context.Courses.Update(course);
             _context.SaveChanges();
             return course;
         }
-        
+        //public void deletecourse(int id)
+        //{
 
+        //    var coure=_context.Courses.FirstOrDefault(c=>c.Id== id);
+        //    _context.Remove(coure);
+        //    _context.SaveChanges();
+            
+
+
+        //}
     }
+        
+    
 }

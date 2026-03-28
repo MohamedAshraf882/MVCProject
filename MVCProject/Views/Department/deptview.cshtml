@@ -9,21 +9,22 @@
 	</div>
 }
 <h1> Department List</h1>
-<form asp-action="SearchByName" method="get">
+<form asp-action="SearchByName" method="get" class="form form-control">
 	<input type="text" name="Name" placeholder="Search By Name" />
-	<button type="submit" class="btn btn-info">
+	<button type="submit" class="btn btn-outline-info">
 		Search
 	</button>
 
 </form>
-<a href="/Department/Add" class="btn btn-success">New</a>
+<a href="/Department/Add" class="btn btn-primary">New</a>
 <table class="table table-bordered table-hover" >
 	
 	<tr>
 		<th>No.</th> 
 		<th>Name</th>
 		<th>Manager</th>
-		<th>Dept Edit</th>
+		<th>Edit Department</th>
+		<th>Delete Department</th>
 	</tr>
 	@foreach(var dept in Model)
 	{
@@ -33,11 +34,11 @@
 			<td>
 				<a asp-action="Details" asp-route-id="@dept.Id">
 					@dept.Name
-			</a>
+			    </a>
 			</td>
 			<td>@dept.Manger</td>
 			<td>
-				<a href="/Department/Edit/@dept.Id" class=" btn btn-success">Edit</a>
+				<a asp-action="Edit" asp-route-id="@dept.Id" class=" btn btn-primary">Edit</a>
 			</td>
 			<td>
 				<form asp-action="Delete" method="post" style="display:inline">

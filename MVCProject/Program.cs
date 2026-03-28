@@ -14,6 +14,7 @@ namespace MVCProject
             builder.Services.AddScoped<DepartmentBL>();
             builder.Services.AddScoped<InstructorBL>();
             builder.Services.AddScoped<CourseBl>();
+            builder.Services.AddScoped<AppDbContext>();
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

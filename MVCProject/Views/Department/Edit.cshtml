@@ -6,16 +6,25 @@
 <h1> Edit </h1>
 <form method="post" action="/Department/SaveEdit/@Model.Id">
 	<div>
-		<label>Name</label>
-		<input name="Name" id="Name" value="@Model.Name" type="text" class="form form-control" />
+		@* <label>Name</label> *@
+		@* <input name="Name" id="Name" value="@Model.Name" type="text" class="form form-control" /> *@
+		@* @Html.LabelFor(d=>d.Name)
+		@Html.TextBoxFor(d=>d.Name,new{style="color:red",@class="form form-control"}) *@
+		<label asp-for="Name"></label>
+		<input class="form form-control" asp-for="Name" />
 	</div>
 	<div>
-		<label>Manger</label>
-		<input name="Manger" id="Manger" value="@Model.Manger" type="text" class="form form-control" />
+		@* <label>Manger</label> *@
+		@* <input name="Manger" id="Manger" value="@Model.Manger" type="text" class="form form-control" />@**@
+		@* @Html.LabelFor(d=>d.Manger )
+        @Html.EditorFor(d=>d.Manger) *@
+		@* @Html.TextBoxFor(d=>d.Manger) *@
+		<label asp-for="Manger"></label>
+		<input asp-for="Manger" class=" form form-control" />
 	</div>
 	<div>
 		<div>
-		<input type="submit" value="Save" class="btn btn-primary" />
+		<input type="submit" value="Save" class="btn btn-success" />
 		</div>
 	</div>
 </form>

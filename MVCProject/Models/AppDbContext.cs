@@ -11,8 +11,14 @@ namespace MVCProject.Models
         {
 
         }
-        
-        
+
+        //public AppDbContext()
+        //{
+
+
+        //}
+
+
         //Data Source =.; Initial Catalog = Company; Integrated Security = True; Encrypt=False;Trust Server Certificate=True
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -4,14 +4,15 @@
  }
 
 <h1>Instructor List</h1>
-<form asp-action="SearchName" method="get">
+<form asp-action="SearchName" method="get" class="form form-control">
 	<input type="text" name="Name" placeholder="Search By Name" />
-	<button type="submit" class="btn btn-primary">
+	<button type="submit" class="btn btn-info">
 		Search
 	</button>
 
 </form>
-<a href="/Instructor/Create" class="btn btn-success">New</a>
+
+<a href="/Instructor/Create" class="btn btn-primary">New</a>
 <table class="table table-bordered table-hover">
 
 	<tr>
@@ -35,7 +36,18 @@
 					@inst.Name
 				</a> 
 			</td>
-			<td> @inst.Image</td>
+			@* <td> @inst.Image</td> *@
+			@* <td><img src="data:image/*;base64,@Convert.ToBase64String(inst.Image)" width="100" /></td> *@
+			<td>
+			@if (!string.IsNullOrEmpty(inst.Image))
+			{
+					<img src="/Images/@inst.Image" width="100" class="img-thumbnail" />
+			}
+			else
+			{
+					<img src="/Images/default.Png" width="100" class="img-thumbnail" />
+			}
+			</td>
 			<td> @inst.Department.Name</td>
 			<td> @inst.Address</td>
 			<td> @inst.Salary</td>

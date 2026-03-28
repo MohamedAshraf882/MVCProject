@@ -5,7 +5,7 @@
 namespace MVCProject.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class intit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +67,7 @@ namespace MVCProject.Migrations
                         column: x => x.Dept_Id,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,8 +76,8 @@ namespace MVCProject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Salary = table.Column<double>(type: "float", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Dept_Id = table.Column<int>(type: "int", nullable: false),

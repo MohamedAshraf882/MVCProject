@@ -3,15 +3,26 @@
 	ViewData["Title"] = "Edit";
 }
 <h1>Edit instructor</h1>
-<form method="post" action="/Instructor/SaveEdit">
+<form method="post" action="/Instructor/SaveEdit" enctype="multipart/form-data">
 	<input type="hidden" name="Id" value="@Model.Id" />
 	<div>
 		<label>Name</label>
 		<input name="Name" id="Name" value="@Model?.Name" type="text" class="form form-control" />
 	</div>
 	<div>
-		<label>Image</label>
-		<input name="Image" id="Image" value="@Model?.Image" type="text" class="form form-control" />
+		@* <label>Image</label>
+		<input name="Image" id="Image" value="@Model?.Image" type="text" class="form form-control" /> *@
+		@* <img src="data:image/*;base64,@Convert.ToBase64String(Model.Currentimage)" width="100" /> *@
+		@if (Model?.Currentimage != null)
+		{
+			@* <img src="data:image/*;base64,@Convert.ToBase64String(Model.Currentimage)" width="100" /> *@
+			<img src="/Images/@Model.Currentimage" width="100" class="img-thumbnail" />
+		}
+		else
+		{
+			<img src="/Images/default.Png" width="100" class="img-thumbnail" />
+		}
+		<input type="file" asp-for="Image" />
 	</div>
 	<div>
 		<label>Salary</label>
@@ -59,4 +70,9 @@
 	<input type="submit" value="Save" class="btn btn-success" />
 
 </form>
+@section Scripts {
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
 <a href="/Instructor/Index">Back To List</a>
