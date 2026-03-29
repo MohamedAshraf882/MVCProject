@@ -6,15 +6,20 @@
 
 <h1> Add</h1>
 
-<form method="post" action="/Department/SaveAdd">
+<form method="post" asp-action="SaveAdd" asp-controller="Department">
 	<div>
-		<label>Name</label>
-		<input name="Name" id="Name" value="@Model?.Name" type="text" class="form form-control"/>
+		@* <label>Name</label>
+		<input name="Name" id="Name" value="@Model?.Name" type="text" class="form form-control"/> *@
+		<label asp-for="Name"></label>
+        <input asp-for="Name" class="form form-control" />
 		<span asp-validation-for="Name" class="text-danger"></span>
 	</div>
 	<div>
-		<label>Manger</label>
-		<input name="Manger" id="Manger" value="@Model?.Manger" type="text" class="form-control"/>
+		@* <label>Manger</label>
+		<input name="Manger" id="Manger" value="@Model?.Manger" type="text" class="form-control"/> *@
+		<label asp-for="Manger"></label>
+		<input asp-for="Manger" class="form form-control" />
+		<span asp-validation-for="Manger" class="text-danger"></span>
 	</div>
 	<div>
 	<input type="submit" value="Create" class="btn btn-primary"/>

@@ -1,4 +1,5 @@
-﻿using MVCProject.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using MVCProject.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace MVCProject.ModelView
@@ -10,6 +11,7 @@ namespace MVCProject.ModelView
         [Required]
         [MinLength(2, ErrorMessage = "Name must be greater than 1 letter ")]
         [MaxLength(100, ErrorMessage = "Name must be less than 100 letter")]
+        [Remote("NameCheck","Instructor",AdditionalFields = "Address", ErrorMessage ="Name must contain ast")]
 
         public string Name { get; set; }
 

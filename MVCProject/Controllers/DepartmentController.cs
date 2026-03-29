@@ -45,7 +45,7 @@ namespace MVCProject.Controllers
         [HttpPost]
         public IActionResult SaveAdd(Department dept)
         {
-            if (dept == null || dept.Name == null || dept.Manger == null)
+            if (!ModelState.IsValid)
             {
                 return View("Add", dept);
                 
@@ -61,7 +61,7 @@ namespace MVCProject.Controllers
             var department = _departmentBL.details(id);
             if (department == null)
             {
-                return NotFound($"Department with ID {id} not found.");
+                return View("Edit", department);
             }
 
             return View("Edit",department);
@@ -70,7 +70,7 @@ namespace MVCProject.Controllers
         [HttpPost]
        public IActionResult SaveEdit(Department dept)
         {
-            if (dept ==null||dept.Name == null || dept.Manger == null)
+            if (!ModelState.IsValid)
             {
                 return View("Edit", dept);
                 

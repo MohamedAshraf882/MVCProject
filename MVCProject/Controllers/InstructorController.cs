@@ -159,6 +159,21 @@ namespace MVCProject.Controllers
             return RedirectToAction("Index");
         
         }
-       
+        [HttpGet]
+        public IActionResult NameCheck(string Name, string Address)
+        {
+            if (Address == "asute")
+            {
+                if (!Name.Contains("ast"))
+                {
+                    return Json(false);
+                }
+                return Json(false);
+            }
+            return Json(true);
+        }
+
+
+
     }
 }
